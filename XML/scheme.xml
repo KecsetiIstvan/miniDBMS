@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Databases>
+<DataBase dataBaseName="Premium">
+    <Tables>
+    <Table fileName="geo.kv" rowLength="114" tableName="geo">
+        <Structure>
+            <Attribute attributeName="poi_id" isnull="0" length="64" type="char"/>
+            <Attribute attributeName="latitude" isnull="0" type="double"/>
+        </Structure>
+        <primaryKey>
+            <pkAttribute>poi_id</pkAttribute>
+        </primaryKey>
+        <IndexFiles>
+        <IndexFile indexName="geoLat.ind" indexType="BTree" isUnique="0" keyLength="25">
+            <IndexAttributes>
+                <IAttribute>latitude</IAttribute>
+            </IndexAttributes>
+        </IndexFile>
+        <IndexFile indexName="geoLong.ind" indexType="BTree" isUnique="0" keyLength="25">
+            <IndexAttributes>
+                <IAttribute>longitude</IAttribute>
+            </IndexAttributes>
+        </IndexFile>
+        </IndexFiles>
+    </Table>
+    <Table fileName="poi.kv" rowLength="300" tableName="poi">
+        <Structure>
+        <Attribute attributeName="poi_id" isnull="0" length="64" type="char"/>
+        <Attribute attributeName="language" isnull="0" type="int"/>
+        <Attribute attributeName="poiName" isnull="0" length="255" type="char"/>
+        </Structure>
+        <primaryKey>
+        <pkAttribute>poi_id</pkAttribute>
+        <pkAttribute>language</pkAttribute>
+        </primaryKey>
+        <foreignKeys>
+        <foreignKey>
+            <fkAttribute>poi_id</fkAttribute>
+            <references>
+                <refTable>geo</refTable>
+                <refAttribute>poi_id</refAttribute>
+            </references>
+        </foreignKey>
+        </foreignKeys>  
+        <uniqueKeys>
+        <UniqueAttribute> ??? </UniqueAttribute>
+        </uniqueKeys>
+        <IndexFiles>
+        <IndexFile indexName="poi_poid.ind" indexType="BTree" isUnique="0" keyLength="64">
+        <IndexAttributes>
+            <IAttribute>poi_id</IAttribute>
+        </IndexAttributes>
+        </IndexFile>
+        <IndexFile indexName="poiName.ind" indexType="BTree" isUnique="1" keyLength="255">
+        <IndexAttributes>
+            <IAttribute>poiName</IAttribute>
+        </IndexAttributes>
+        </IndexFile>
+        </IndexFiles>
+        </Table>
+    </Tables>
+</DataBase>
+<DataBase dataBaseName="SecondTest">
+
+  </DataBase>
+</Databases>
